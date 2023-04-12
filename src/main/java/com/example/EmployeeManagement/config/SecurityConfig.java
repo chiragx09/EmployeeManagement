@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 
@@ -28,7 +30,13 @@ public class SecurityConfig{
                 .loginPage("/signin")
                 .permitAll()
                 .loginProcessingUrl("/dologin")
-                .defaultSuccessUrl("/home");
+                .defaultSuccessUrl("/home")
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .permitAll();
         return http.build();
     }
 	
