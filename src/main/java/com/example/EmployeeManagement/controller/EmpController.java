@@ -36,7 +36,7 @@ public class EmpController {
 	}
 	
 	@PostMapping("/register")
-	public String empRegister(Employee e, HttpSession session) {
+	public String empRegister(@ModelAttribute Employee e, HttpSession session) {
 		System.out.println(e);
 		service.addEmp(e);
 		session.setAttribute("msg", "Employee addes successfully...");
