@@ -20,6 +20,11 @@ public class EmpController {
 	private EmpService service;
 	
 	@GetMapping("/")
+	public String serveHit(Model m) {
+		return "redirect:home";
+	}
+	
+	@GetMapping("/home")
 	public String home(Model m) {
 		m.addAttribute("emp",service.getAllEmp() );
 		return "index";
